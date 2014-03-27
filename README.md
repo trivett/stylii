@@ -1,4 +1,4 @@
-trimbot
+stylii.me
 =======
 
 A smarter way to find a hairstylist.
