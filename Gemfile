@@ -47,3 +47,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem "httparty"
+gem "json"
+gem 'validates_timeliness', '~> 3.0'
