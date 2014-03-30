@@ -1,0 +1,20 @@
+<h1><%= @salon.name %></h1>
+
+<img src="<%= @salon.photo_url %>" alt="">
+
+<p><%= @salon.address %></p>
+
+<p><%= @salon.city %>, <%= @salon.state %> <%= @salon.zipcode %></p>
+
+<p><%= @salon.phone_number %></p>
+
+<p>This salon got <%= @salon.yelp_rating %> stars on Yelp</p>
+
+<h2>Stylists at <%= @salon.name %></h2>
+
+  <ul>
+    <% @stylists.each do |stylist| %>
+    <li><%= link_to(stylist.name, stylist_path(@salon, stylist)) %> </li>
+    <% end %>
+  </ul>
+

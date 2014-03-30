@@ -34,6 +34,12 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
+  gem "better_errors"
+
+end
+
+group :development do
+  gem 'pry'
 end
 
 # Use ActiveModel has_secure_password
@@ -51,3 +57,4 @@ gem 'bcrypt', '~> 3.1.7'
 gem "httparty"
 gem "json"
 gem 'validates_timeliness', '~> 3.0'
+gem 'chronic'

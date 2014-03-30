@@ -1,0 +1,33 @@
+<h1>Book an appointment with <%= @stylist.name %></h1>
+
+<%= form_for(@appointment) do |f| %>
+  <% if @appointment.errors.any? %>
+  Please correct the following errors:
+  <ul>
+    <% @appointment.errors.full_messages.each do |msg| %>
+      <li class="error"><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div>
+    <p>What when would you like to get a haircut?</p>
+    <%= f.label :start_time %><br>
+    <%= f.text_field :user_input %>
+    <%= f.hidden_field(:client_id, :value => current_client.id) %>
+    <%= f.hidden_field(:stylist_id, :value => @stylist.id) %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+<p>These are the times that <%= @stylist.name %> is unavailable.</p>
+
+  <ul>
+    <% @stylist.appointments.each do |appointment| %>
+      <% if appointment.start_time.future? %>
+      <li><%= appointment.start_time.strftime("%d %b at %I:%M%p") %></li>
+      <% end %>
+      <% end %>
+  </ul>
+
+

@@ -1,0 +1,13 @@
+<h1><%= @stylist.name %></h1>
+<img src="<%= @stylist.photo_url %>" alt="">
+
+<p>Age: <%= @stylist.age %></p>
+
+<p>Price for male haircuts: <%= @stylist.male_price %></p>
+
+
+<p>Price for female haircuts: <%= @stylist.female_price %></p>
+
+<p>Specialty: <%= @stylist.specialty %></p>
+
+<p><%= link_to("Book an appointment with #{@stylist.name}", "/appointments/new?stylist_id=#{@stylist.id}") %></p>

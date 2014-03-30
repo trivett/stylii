@@ -1,0 +1,27 @@
+
+  Welcome back, <%= current_client.name %>!
+
+  <div id="client dashboard">
+
+    <img src="<%= current_client.photo_url %>" alt="">
+
+    <p>Your details:</p>
+
+    <ul>
+      <li><%= current_client.age %></li>
+      <li><%= current_client.phone_number %></li>
+      <li><%= current_client.email %></li>
+      <li><%= current_client.gender %></li>
+    </ul>
+    <p><%= link_to("Edit your information", edit_client_path) %></p>
+  </div>
+
+  <p>Here are some stylists you've seen before. Visit their pages to </p>
+
+  <ul>
+    <% @stylists.each do |stylist| %>
+    <li><%= link_to( stylist.name, stylist) %></li>
+    <% end %>
+  </ul>
+
+<p><%= link_to 'Delete your account', @client, method: :delete, data: { confirm: 'Are you sure?' } %> </p>

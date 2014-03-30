@@ -1,4 +1,4 @@
-class SalonsController < ActionController::Base
+class SalonsController < ApplicationController
 
   def index
     @salons = Salon.all
@@ -6,7 +6,7 @@ class SalonsController < ActionController::Base
 
   def show
     @salon = Salon.find(params[:id])
-
+    @stylists = Stylist.where(:salon_id => @salon.id)
   end
 
   def new
