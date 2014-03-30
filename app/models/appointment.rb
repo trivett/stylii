@@ -2,6 +2,8 @@ class Appointment < ActiveRecord::Base
   belongs_to :client
   belongs_to :stylist
 
+  validates :stylii_rating, numericality: { :greater_than => 0, :less_than_or_equal_to => 5}
+
 
   now = DateTime.now
   # validate that start time is at least 30 mins from now
@@ -18,12 +20,6 @@ class Appointment < ActiveRecord::Base
       self.update(start_time: parsed)
     end
   end
-
-
-  def rate(num)
-    self.update(stylii_rating: num)
-  end
-
 
   # def future?
   #   if self.start_time > DateTime.now
