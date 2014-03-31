@@ -1,11 +1,13 @@
 <p>Welcome back to Stylii, <%= current_client.name %></p>
 
+<p><%= link_to("Your profile", @client) %></p>
+
 <% if @appointments.count > 0 %>
   <h2>Your future appointments:</h2>
   <ul>
     <% @appointments.each do |appointment| %>
     <% if appointment.start_time.future? %>
-        <li>You will see <%= Stylist.find(appointment.stylist_id).name %> at <%= appointment.start_time.strftime("%I:%M%p on %d %b") %> | <%= link_to("Cancel", appointment, method: :delete, data: { confirm: 'Are you sure?' }) %> | <%= link_to("Change appointment", edit_appointment_path(appointment)) %></li>
+        <li>You will see <%= Stylist.find(appointment.stylist_id).name %> at <%= appointment.start_time.strftime("%I:%M %p %Z on %d %b") %> | <%= link_to("Cancel", appointment, method: :delete, data: { confirm: 'Are you sure?' }) %> | <%= link_to("Change appointment", edit_appointment_path(appointment)) %></li>
     <% end %>
     <% end %>
   </ul>
@@ -14,9 +16,16 @@
     <ul>
       <% @appointments.each do |appointment| %>
         <% if appointment.start_time.past? %>
-        <li>You saw <%= Stylist.find(appointment.stylist_id).name %> at <%= appointment.start_time.strftime("%I:%M%p on %d %b") %> | <% if appointment.stylii_rating.nil? %><%= link_to("Rate this haircut", edit_appointment_path(appointment)) %><% else %> Your Rating: <%= appointment.stylii_rating %> <% end %></li>
+        <li>You saw <%= Stylist.find(appointment.stylist_id).name %> at <%= appointment.start_time.strftime("%I:%M %p on %d %b %Z") %> | <% if appointment.stylii_rating.nil? %><%= link_to("Rate this haircut", edit_appointment_path(appointment)) %><% else %> Your Rating: <%= appointment.stylii_rating %> <% end %></li>
         <% end %>
 
         <% end %>
     </ul>
   <% end %>
+
+  <p>calendar:</p>
+
+
+<%= calendar @appointments, {:prev_text=>"prev", :next_text=>"next"} do |appointment| %>
+  <div><%= link_to Stylist.find(appointment.stylist_id).name, appointment %></div>
+<% end %>

@@ -2,6 +2,12 @@ class AppointmentsController < ApplicationController
 
    before_action :require_authentication, only: [:create, :edit, :update, :destroy]
 
+  def show
+    @appointment = Appointment.find(params[:id])
+    @stylist = Stylist.find(@appointment.stylist_id)
+    @client = Client.find(@appointment.client_id)
+  end
+
   def new
     @stylist = Stylist.find(params[:stylist_id])
     @appointment = Appointment.new

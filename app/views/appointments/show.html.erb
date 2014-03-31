@@ -1,0 +1,8 @@
+<h1>On <%= @appointment.start_time.strftime("%b %d") %></h1>
+
+<h2><%= @client.name %> will get a trim from <%= @stylist.name %> at <%= @appointment.start_time.strftime("%I:%M %p") %></h2>
+<h3><%= link_to("Change Appointment Details", edit_appointment_path(@appointment)) %></h3>
+<div class="appointment_pics">
+<img src="<%= @client.photo_url %>" class="client_pic">
+<img src="<%= @stylist.photo_url %>" class="stylist_pic">
+</div>

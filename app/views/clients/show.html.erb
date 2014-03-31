@@ -16,11 +16,11 @@
     <p><%= link_to("Edit your information", edit_client_path) %></p>
   </div>
 
-  <p>Here are some stylists you've seen before. Visit their pages to </p>
+  <p>Here are some stylists you've seen before. Visit their pages to schedule a haircut</p>
 
   <ul>
     <% @stylists.each do |stylist| %>
-    <li><%= link_to( stylist.name, stylist) %></li>
+    <li><%= link_to( "#{stylist.name} at #{stylist.salon.name}", stylist) %></li>
     <% end %>
   </ul>
 

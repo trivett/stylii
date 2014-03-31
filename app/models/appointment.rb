@@ -2,7 +2,7 @@ class Appointment < ActiveRecord::Base
   belongs_to :client
   belongs_to :stylist
 
-  # validates :stylii_rating, numericality: { :greater_than => 0, :less_than_or_equal_to => 5} on: :update
+  validates :stylii_rating, numericality: { :greater_than => 0, :less_than_or_equal_to => 5}, on: :update
 
 
   now = DateTime.now
@@ -11,7 +11,6 @@ class Appointment < ActiveRecord::Base
   validates_uniqueness_of :start_time, scope: [:client_id, :stylist_id]
 
   validates_datetime :start_time, :after => now, on: :create
-
 
   def parse_start
     s = self.user_input
@@ -23,14 +22,15 @@ class Appointment < ActiveRecord::Base
 
   def ending
     start = self.start_time
-    if start
-    plus_45 = start + 2700
-    plus_30 = start + 1800
-    if Client.find(self.client_id).gender == "female"
-      self.update(:end_time => plus_45)
-    else
-      self.update(:end_time => plus_30)
-    ending
+      if start && end_time == nil
+        plus_45 = start + 2700
+        plus_30 = start + 1800
+        if Client.find(self.client_id).gender == "female"
+          self.update(:end_time => plus_45)
+        else
+          self.update(:end_time => plus_30)
+        ending
+      end
     end
   end
 
@@ -38,7 +38,7 @@ class Appointment < ActiveRecord::Base
 
   def stylist_working_that_day?
     stylist = Stylist.find(self.stylist_id)
-    if Chronic.parse(self.start_time).strftime("%A").downcase == stylist.day_off.downcase
+    if self.start_time.strftime("%A").downcase == stylist.day_off.downcase
       return true
     else
       return false

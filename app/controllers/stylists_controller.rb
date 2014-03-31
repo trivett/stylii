@@ -14,4 +14,6 @@ class StylistsController < ApplicationController
     @rating_average = sum / (Appointment.where(:stylii_rating => nil).count - Appointment.all.count).abs
   end
 
+
+
 end

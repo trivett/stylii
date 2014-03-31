@@ -59,3 +59,5 @@ gem "json"
 gem 'validates_timeliness', '~> 3.0'
 gem 'chronic'
 gem 'browser-timezone-rails'
+gem "simple_calendar", "~> 0.1.10"
+gem "binding_of_caller"

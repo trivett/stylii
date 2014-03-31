@@ -11,3 +11,14 @@
  *= require_self
  *= require_tree .
  */
+.calendar td { height: 100px; width: 14.28%; }
+
+td {
+  min-width: 50px;
+  min-height: 50px;
+  border: 1px solid #ccc;
+}
+
+.day_number {
+  margin-top: 0;
+}

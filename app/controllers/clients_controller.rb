@@ -9,7 +9,7 @@ class ClientsController < ApplicationController
   def show
     @client  = Client.find(params[:id])
     @appointments = Appointment.where(:client_id => @client.id)
-    @stylists = @client.stylists
+    @stylists = @client.stylists.uniq
   end
 
   def new
