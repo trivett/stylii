@@ -18,4 +18,20 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     end
   end
+
+  # def current_client
+
+  #   if session[:client_id]
+  #     return Client.find(session[:client_id])
+  #   else
+  #     return nil
+  #   end
+  # end
+
+  # def require_authentication
+  #   if current_client == nil
+  #     redirect_to login_path
+  #   end
+  # end
+
 end

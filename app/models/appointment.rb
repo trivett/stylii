@@ -21,23 +21,44 @@ class Appointment < ActiveRecord::Base
     end
   end
 
+  def ending
+    start = self.start_time
+    plus_45 = start + 2700
+    plus_30 = start + 1800
+    if Client.find(self.client_id).gender == "female"
+      self.update(:end_time => plus_45)
+    else
+      self.update(:end_time => plus_30)
+    end
+  end
 
-  # def rate(num)
-  #   self.update(stylii_rating: num)
-  # end
+# These following few methods check whether the stylist is working, and whether he or she is busy cutting hair at that time.
 
+  def stylist_working_that_day?
+    stylist = Stylist.find(self.stylist_id)
+    if Chronic.parse(self.start_time).strftime("%A").downcase == stylist.day_off.downcase
+      return true
+    else
+      return false
+    end
+  end
 
-  # def future?
-  #   if self.start_time > DateTime.now
-  #     return true
-  #   else
-  #     return false
-  #   end
-  # end
+  def working_at_that_time?
+    stylist = Stylist.find(self.stylist_id)
+      if Chronic.parse(self.start_time).strftime("%I")
+
+    end
+
+  end
+
+  def stylist_free
+    stylist = Stylist.find(self.stylist_id)
+  end
 
 
   after_initialize do |appointment|
     self.parse_start
+    self.ending
   end
 
 end

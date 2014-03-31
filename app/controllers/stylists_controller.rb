@@ -7,6 +7,7 @@ class StylistsController < ApplicationController
   def show
     @stylist = Stylist.find(params[:id])
     @stylist_appointments = Appointment.where(:stylist_id => @stylist.id)
+    ## consider moving to model
     @rated_appointments = @stylist_appointments.where(:stylii_rating != nil && :stylist_id => @stylist.id)
     sum = 0.0
     @rated_appointments.each { |x| sum += x.stylii_rating.to_f }
