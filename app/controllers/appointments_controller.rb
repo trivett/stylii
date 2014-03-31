@@ -29,6 +29,7 @@ class AppointmentsController < ApplicationController
   def update
     @appointment = Appointment.find(params[:id])
     @appointment.update(appointment_params)
+    @appointment.save
     redirect_to root_path
   end
 
@@ -36,7 +37,7 @@ class AppointmentsController < ApplicationController
 
   private
   def appointment_params
-    params.require(:appointment).permit(:client_id, :stylist_id, :user_input)
+    params.require(:appointment).permit(:client_id, :stylist_id, :user_input, :stylii_rating)
   end
 
 end

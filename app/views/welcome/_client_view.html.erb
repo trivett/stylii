@@ -1,6 +1,6 @@
 <p>Welcome back to Stylii, <%= current_client.name %></p>
 
-<% if @appointments.length > 0 %>
+<% if @appointments.count > 0 %>
   <h2>Your future appointments:</h2>
   <ul>
     <% @appointments.each do |appointment| %>
@@ -14,7 +14,7 @@
     <ul>
       <% @appointments.each do |appointment| %>
         <% if appointment.start_time.past? %>
-        <li>You saw <%= Stylist.find(appointment.stylist_id).name %> at <%= appointment.start_time.strftime("%I:%M%p on %d %b") %> | <% if appointment.stylii_rating.nil? %> <%= link_to("Rate this haircut", edit_appointment_path(appointment)) %><% else %> <%= appointment.stylii_rating %> <% end %></li>
+        <li>You saw <%= Stylist.find(appointment.stylist_id).name %> at <%= appointment.start_time.strftime("%I:%M%p on %d %b") %> | <% if appointment.stylii_rating.nil? %><%= link_to("Rate this haircut", edit_appointment_path(appointment)) %><% else %> <%= appointment.stylii_rating %> <% end %></li>
         <% end %>
 
         <% end %>

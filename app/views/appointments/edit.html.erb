@@ -17,16 +17,13 @@
     <%= f.collection_select(:stylist_id, @stylists, :id, :name) %>
     <%= f.hidden_field(:client_id, :value => current_client.id) %>
   </div>
-
 <% else %>
 
   <div>
-    <%= f.label :rating %>
+    <%= f.label :stylii_rating %>
     <%= f.number_field :stylii_rating %>
-
   </div>
-
-<% end %>
+  <% end %>
   <%= f.submit %>
 <% end %>
 
