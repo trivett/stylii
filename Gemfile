@@ -58,3 +58,4 @@ gem "httparty"
 gem "json"
 gem 'validates_timeliness', '~> 3.0'
 gem 'chronic'
+gem 'browser-timezone-rails'

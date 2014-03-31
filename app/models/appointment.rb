@@ -23,12 +23,14 @@ class Appointment < ActiveRecord::Base
 
   def ending
     start = self.start_time
+    if start
     plus_45 = start + 2700
     plus_30 = start + 1800
     if Client.find(self.client_id).gender == "female"
       self.update(:end_time => plus_45)
     else
       self.update(:end_time => plus_30)
+    ending
     end
   end
 
