@@ -14,17 +14,19 @@ class AppointmentsController < ApplicationController
   end
 
   def create
+    # my_hash = appointment_params
     @appointment = Appointment.new(appointment_params)
+    @stylist = Stylist.find(@appointment.stylist_id)
     @appointment.parse_start
     @appointment.ending
     @appointment.save
-    redirect_to root_path
+    render :new
   end
 
   def destroy
     @appointment = Appointment.find(params[:id])
     @appointment.destroy
-    redirect_to root_path
+
   end
 
   def edit

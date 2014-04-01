@@ -11,11 +11,11 @@ class Appointment < ActiveRecord::Base
 
   validates_datetime :start_time, :after => now, on: :create
 
-  validate :stylist_should_be_working
+  validate :stylist_should_be_working, on: :create
 
-  validate :stylist_should_be_working_at_that_time
+  validate :stylist_should_be_working_at_that_time, on: :create
 
-  validate :stylist_shouldnt_be_cutting_another_customers_hair
+  validate :stylist_shouldnt_be_cutting_another_customers_hair, on: :create
 
 
 
@@ -26,20 +26,19 @@ class Appointment < ActiveRecord::Base
     s = self.user_input
     if s
     parsed = Chronic::parse(s)
-      self.update(start_time: parsed)
+      self.start_time = parsed
     end
   end
 
   def ending
     start = self.start_time
-      if start && end_time == nil
-        plus_45 = start + 2700
-        plus_30 = start + 1800
-        if Client.find(self.client_id).gender == "female"
-          self.update(:end_time => plus_45)
-        else
-          self.update(:end_time => plus_30)
-        ending
+    if start && end_time == nil
+      plus_45 = start + 2700
+      plus_30 = start + 1800
+      if Client.find(self.client_id).gender == "female"
+        self.end_time = plus_45
+      else
+        self.end_time = plus_30
       end
     end
   end
@@ -63,8 +62,8 @@ class Appointment < ActiveRecord::Base
   end
 
   def stylist_shouldnt_be_cutting_another_customers_hair
-    stylist = Stylist.find(self.stylist_id)
-    appointments = Appointment.where(:stylist_id => stylist.id)
+    person = Stylist.find(1)
+    appointments = Appointment.where(:stylist_id => person.id)
     future_appointments = []
     appointments.each do |x|
       if x.start_time.future?
@@ -72,14 +71,23 @@ class Appointment < ActiveRecord::Base
       end
     end
 
+      binding.pry
+    future_appointments.each do |a|
+      end_time_local = a.end_time || (a.start_time + 900)
 
-  future_appointments.each do |a|
-    if self.start_time > a.start_time && self.start_time < a.end_time || self.end_time > a.start_time && self.end_time < a.end_time
+      if self.start_time.between?(a.start_time.to_time, end_time_local.to_time)
+        errors.add(:start_time, "can't be during another customer's haircut")
+        break
 
-      errors.add(:start_time, "can't be during another customer's haircut")
+
+      end
+
     end
+
   end
-end
+
+
+
 
 end
 

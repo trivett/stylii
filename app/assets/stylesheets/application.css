@@ -29,3 +29,6 @@ td {
 .day_number {
   margin-top: 0;
 }
+
+img {max-height: 200px;
+  ;}
