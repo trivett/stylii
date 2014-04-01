@@ -15,6 +15,8 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(appointment_params)
+    @appointment.parse_start
+    @appointment.ending
     @appointment.save
     redirect_to root_path
   end

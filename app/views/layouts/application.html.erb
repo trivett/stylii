@@ -8,12 +8,16 @@
 </head>
 <body>
 <ul id="nav">
-  <% if current_client %>
-  <li><%= link_to("Log out, #{ current_client.name}", logout_path) %>
-    <% else %>
-      <li><%= link_to("Client Login", login_path) %>
-  </li>
-  <li><%= link_to("Create an Account", new_client_path) %></li>
+  <% if current_client || current_stylist %>
+    <li><%= link_to "Your Dashboard", root_path %></li>
+    <% end %>
+    <% if current_client %>
+    <li><%= link_to("Log out, #{current_client.name}", logout_path) %>
+      <% elsif current_stylist %>
+        <li><%= link_to("Log out, #{current_stylist.name}", "/logout-stylist") %></li>
+  <% else %>
+    <li><%= link_to("Client Login", login_path) %></li>
+    <li><%= link_to("Stylist Login", "/stylist-login") %></li>
   <% end %>
   <li><%= link_to("Find Local Salons", salons_path ) %> </li>
 </ul>

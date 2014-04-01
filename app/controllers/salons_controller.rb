@@ -16,6 +16,9 @@ class SalonsController < ApplicationController
 
   def create
     @salon = Salon.new(salon_params)
+    @salon.lookup_by_phone
+    @salon.save
+
   end
 
 

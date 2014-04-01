@@ -21,6 +21,7 @@ class ClientsController < ApplicationController
 
     unless @client.errors.any?
       @client.save
+      redirect_to @client
     else
       render 'new'
     end

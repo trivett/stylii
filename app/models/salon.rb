@@ -10,26 +10,25 @@ class Salon < ActiveRecord::Base
 
   def lookup_by_phone
     #gets the full yelp details to flesh out the record from just its phone number
-    digits = self.phone_number
-    full_url = YELP_LOOKUP_URL + digits + "&ywsid=" + YWS_ID
-    raw_response = HTTParty.get(full_url)
-    data = JSON.parse(raw_response.body)["businesses"][0]
+      digits = self.phone_number
+      full_url = YELP_LOOKUP_URL + digits + "&ywsid=" + YWS_ID
+    unless self.name
+      raw_response = HTTParty.get(full_url)
 
-    self.update(:name => data["name"],
-                     :address => data["address1"],
-                     :city => data["city"],
-                     :yelp_rating_image_url => data["rating_img_url"],
-                     :zipcode => data["zip"],
-                     :state => data["state"],
-                     :photo_url => data["photo_url"],
-                     :yelp_rating => data["avg_rating"]
-                     )
-    self.save
 
-  end
+      data = JSON.parse(raw_response.body)["businesses"][0]
 
-  after_initialize do |u|
-    u.lookup_by_phone
+      self.update(:name => data["name"],
+                       :address => data["address1"],
+                       :city => data["city"],
+                       :yelp_rating_image_url => data["rating_img_url"],
+                       :zipcode => data["zip"],
+                       :state => data["state"],
+                       :photo_url => data["photo_url"],
+                       :yelp_rating => data["avg_rating"]
+                       )
+    end
+
   end
 end
 

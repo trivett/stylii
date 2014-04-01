@@ -8,6 +8,9 @@ class Client < ActiveRecord::Base
   validates :email, uniqueness: true
   validates :phone_number, uniqueness: true
 
+  # before_action :require_authentitcation
+  # before_action :require_authorization
+
 
   def age
     age = (self.birthdate - DateTime.now).to_i

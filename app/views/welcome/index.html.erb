@@ -2,6 +2,14 @@
 
 <% if current_client %>
   <%= render 'client_view' %>
+<% elsif current_stylist %>
+  <%= render "stylist_dashboard" %>
 <% else %>
-  <h1>stuff for choosing to be a stylist or client</h1>
+
+  <h1>Welcome to Stylii</h1>
+
+  <ul>
+    <li><%= link_to("Create an Account", new_client_path) %></li>
+    <li><%= link_to("Stylists Log In Here", "/stylist-login" ) %></li>
+  </ul>
 <% end %>

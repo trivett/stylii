@@ -7,9 +7,10 @@ class WelcomeController < ApplicationController
       @client = Client.find(current_client.id)
 
     elsif current_stylist
+      @appointments = Appointment.where(stylist_id: current_stylist.id)
 
-
-
+      @stylist = Stylist.find(current_stylist.id)
+      # @todays_appointments = @appointments.where(start_time.day == Chronic.parse("today").day)
 
     end
   end

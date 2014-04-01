@@ -11,6 +11,13 @@
  *= require_self
  *= require_tree .
  */
+
+#nav li {
+  display: inline;
+  list-style: none;
+  padding: 20px;
+}
+
 .calendar td { height: 100px; width: 14.28%; }
 
 td {

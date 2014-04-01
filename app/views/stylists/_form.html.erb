@@ -1,25 +1,22 @@
 
-<%= form_for(@client) do |f| %>
+<%= form_for([@salon, @stylist]) do |f| %>
 
-  <% if @client.errors.any? %>
+  <% if @stylist.errors.any? %>
     Please correct the following errors:
     <ul>
-      <% @client.errors.full_messages.each do |msg| %>
+      <% @stylist.errors.full_messages.each do |msg| %>
         <li class="error"><%= msg %></li>
       <% end %>
     </ul>
   <% end %>
 
+
   <div>
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-    <div>
-    <%= f.label :gender %><br>
-    <%= f.text_field :gender %>
-  </div>
+
   <div>
-    <p>Grab the URL for a photo of you looking awesome so your stylist knows what you like. Don't worry, you can change it later or put in a celeb's pic if you want to change your 'do.</p>
     <%= f.label :photo_url %><br>
     <%= f.text_field :photo_url %>
   </div>
@@ -28,14 +25,34 @@
     <%= f.text_field :email %>
   </div>
   <div>
-    <%= f.label :phone_number %><br>
-    <%= f.number_field :phone_number %>
+    <%= f.label :male_price %><br>
+    <%= f.number_field :male_price %>
+  </div>
+  <div>
+    <%= f.label :female_price %><br>
+    <%= f.number_field :female_price %>
+  </div>
+    <div>
+    <%= f.label :day_off %><br>
+    <%= f.text_field :day_off %>
+  </div>
+  <div>
+    <%= f.label :starts_work_at %><br>
+    <%= f.text_field :starts_work_at %>
+  </div>
+  <div>
+    <%= f.label :ends_work_at %><br>
+    <%= f.text_field :ends_work_at %>
   </div>
   <div>
     <%= f.label :birthdate %><br>
     <%= f.date_field :birthdate %>
   </div>
 
+  <div>
+    <%= f.label :specialty %><br>
+    <%= f.text_field :specialty %>
+  </div>
   <div>
     <%= f.label :password %><br>
     <%= f.password_field :password %>

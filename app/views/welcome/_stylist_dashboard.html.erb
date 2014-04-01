@@ -1,0 +1,29 @@
+<p>Welcome back to Stylii, <%= current_stylist.name %>
+</p>
+
+<p><%= link_to("Your profile", @stylist) %></p>
+
+<% if @appointments.count > 0 %>
+  <h2>Your future appointments:</h2>
+  <ul>
+   <% @appointments.each do |appointment| %>
+    <% if appointment.start_time.future? %>
+        <li>You will see <%= Client.find(appointment.client_id).name %> at <%= appointment.start_time.strftime("%I:%M %p %Z on %d %b") %> | <%= link_to("Cancel", appointment, method: :delete, data: { confirm: 'Are you sure?' }) %> | <%= link_to("Change appointment", edit_appointment_path(appointment)) %></li>
+    <% end %>
+    <% end %>
+  </ul>
+
+<h3>Past appointments:</h3>
+    <ul>
+      <% @appointments.each do |appointment| %>
+        <% if appointment.start_time.past? %>
+        <li>You saw <%= Client.find(appointment.client_id).name %> at <%= appointment.start_time.strftime("%I:%M %p on %d %b %Z") %> | <% if appointment.stylii_rating %> Your Rating: <%= appointment.stylii_rating %> <% else %> Not yet rated. <% end %></li>
+        <% end %>
+        <% end %>
+    </ul>
+
+<% end %>
+
+<h2>Your appointments today:</h2>
+
+

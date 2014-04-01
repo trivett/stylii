@@ -14,7 +14,13 @@
 
   <ul>
     <% @stylists.each do |stylist| %>
-    <li><%= link_to(stylist.name, stylist_path(@salon, stylist)) %> </li>
+    <li><%= link_to(stylist.name, stylist_path(stylist)) %>  | Rating: <% unless stylist.rating_average == 0.0 %><%= stylist.rating_average %> <% else %> Not Yet Rated <% end %> </li>
     <% end %>
   </ul>
 
+
+<!-- If logged in as a stylist -->
+
+<% if current_stylist %>
+<%= link_to("Add a new stylist to this salon", new_salon_stylist_path(@salon)) %>
+<% end %>
