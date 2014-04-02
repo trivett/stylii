@@ -26,7 +26,24 @@ class StylistsController < ApplicationController
     @stylist.update(:rating_average => @rating_average)
   end
 
+  def edit
+    @stylist = Stylist.find(params[:id])
+    if current_stylist == @stylist
+      render 'edit'
+    else
+      redirect_to root_path
+    end
+  end
 
+  def update
+    @stylist =Stylist.find(params[:id])
+    if current_stylist == @stylist
+      @stylist.update(stylist_params)
+      redirect_to @stylist
+    else
+      redirect_to root_path
+    end
+  end
 
 
   private

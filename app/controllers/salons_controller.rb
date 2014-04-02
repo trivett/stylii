@@ -18,6 +18,7 @@ class SalonsController < ApplicationController
     @salon = Salon.new(salon_params)
     @salon.lookup_by_phone
     @salon.save
+    redirect_to salons_path
   end
 
 

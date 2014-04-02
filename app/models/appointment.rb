@@ -5,8 +5,7 @@ class Appointment < ActiveRecord::Base
 
 
   now = DateTime.now
-  # validate that start time is at least 30 mins from now
-  # deal with time zones eventually
+
   validates_uniqueness_of :start_time, scope: [:client_id, :stylist_id]
 
   validates_datetime :start_time, :after => now, on: :create

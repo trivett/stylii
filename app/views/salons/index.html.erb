@@ -1,5 +1,13 @@
-<ul>
+<ul class"salonlist">
 <% @salons.each do |salon| %>
-  <li><%= link_to(salon.name, salon) %></li>
+  <li>
+  <span><%= link_to(salon.name, salon) %></span>
+  <br>
+  <span><img src="<%= salon.photo_url %>" alt=""></span>
+  </li>
   <% end %>
 </ul>
+
+<% if current_stylist %>
+  <%= link_to("Add a new salon", new_salon_path) %>
+<% end %>

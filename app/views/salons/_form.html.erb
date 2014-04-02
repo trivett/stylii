@@ -1,0 +1,21 @@
+
+<%= form_for(@salon) do |f| %>
+
+  <% if @salon.errors.any? %>
+    Please correct the following errors:
+    <ul>
+      <% @salon.errors.full_messages.each do |msg| %>
+        <li class="error"><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+<h2>As long as your salon is on <a href="http://yelp.com">Yelp</a> we can get the rest of your details.</h2>
+  <div>
+    <%= f.label :phone_number %><br>
+    <%= f.number_field :phone_number %>
+  </div>
+
+    <%= f.submit %>
+  </div>
+<% end %>
