@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_authentication
-    if current_client == nil
+    if current_client == nil && current_stylist == nil
       redirect_to login_path
     end
   end
@@ -34,21 +34,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_authorization
+    if current_client != @client.id
+      redirect_to root_path
+    end
+  end
+
+  def require_stylist_authorization
+    if current_stylist != @stylist.id
+      redirect_to root_path
+    end
+  end
+
+
 end
-  # def require_authentication
-  #     redirect_to login_path unless current_user || current_stylist
-  #   end
-  # end
-
-
-
-
-  # def require_authentication
-  #   redirect_to login_path unless current_user
-  # end
-
-  # def require_admin
-  #   if !admin?
-  #     redirect_to root_path
-  #   end
-  # end

@@ -46,8 +46,9 @@ class Appointment < ActiveRecord::Base
 
   def stylist_should_be_working
     stylist = Stylist.find(self.stylist_id)
-    if self.start_time.strftime("%A").downcase == stylist.day_off.downcase
-      errors.add(:start_time, "can't be on stylist's day off")
+      self.parse_start
+      if self.start_time.strftime("%A").downcase == stylist.day_off.downcase
+        errors.add(:start_time, "can't be on stylist's day off")
     end
   end
 
@@ -70,7 +71,7 @@ class Appointment < ActiveRecord::Base
       end
     end
 
-      binding.pry
+      # binding.pry
     future_appointments.each do |a|
       end_time_local = a.end_time || (a.start_time + 900)
 

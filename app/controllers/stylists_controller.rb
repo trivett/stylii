@@ -1,6 +1,7 @@
 class StylistsController < ApplicationController
 
-
+   before_action :require_authentication, only: [:edit, :update, :destroy]
+  before_action :require_stylist_authorization, only: [:edit, :update, :destroy]
 
   def new
     @salon = Salon.find(params[:salon_id])
@@ -43,6 +44,16 @@ class StylistsController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+
+  def destroy
+    @stylist = Stylist.find(params[:id])
+    @stylist.destroy
+    if current_stylist == @stylist
+      session[:stylist_id] =  nil
+    end
+    redirect_to root_path
   end
 
 

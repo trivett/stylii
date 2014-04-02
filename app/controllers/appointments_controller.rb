@@ -20,13 +20,13 @@ class AppointmentsController < ApplicationController
     @appointment.parse_start
     @appointment.ending
     @appointment.save
-    render :new
+    redirect_to root_path
   end
 
   def destroy
     @appointment = Appointment.find(params[:id])
     @appointment.destroy
-
+    redirect_to root_path
   end
 
   def edit
