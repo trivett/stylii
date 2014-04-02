@@ -11,13 +11,13 @@ Client.create(name: "Natalie", photo_url: "http://www.celebhairdo.com/wp-content
 
 
 
-Salon.create(:phone_number: "2123672123")
-Salon.create(:phone_number: "2129891807")
-Salon.create(:phone_number: "2126886498")
-Salon.create(:phone_number: "2122262600")
-Salon.create(:phone_number: "2123343777")
-Salon.create(:phone_number: "2122651700")
-Salon.create(:phone_number: "7187828376")
+Salon.create(:phone_number => "2123672123")
+Salon.create(:phone_number => "2129891807")
+Salon.create(:phone_number => "2126886498")
+Salon.create(:phone_number => "2122262600")
+Salon.create(:phone_number => "2123343777")
+Salon.create(:phone_number => "2122651700")
+Salon.create(:phone_number => "7187828376")
 
 
 
