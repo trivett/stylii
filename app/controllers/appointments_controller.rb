@@ -32,7 +32,7 @@ class AppointmentsController < ApplicationController
   def edit
     @appointment = Appointment.find(params[:id])
     @stylist = Stylist.find(@appointment.stylist_id)
-    @salon = Salon.find(@stylist.id)
+    @salon = Salon.find(@stylist.salon_id)
     @stylists = @salon.stylists
   end
 
