@@ -8,7 +8,7 @@
   <ul>
    <% @appointments.each do |appointment| %>
     <% if appointment.start_time.future? %>
-        <li>You will see <%= Client.find(appointment.client_id).name %> at <%= appointment.start_time.strftime("%I:%M %p %Z on %d %b") %> | <%= link_to("Cancel", appointment, method: :delete, data: { confirm: 'Are you sure?' }) %> | <%= link_to("Change appointment", edit_appointment_path(appointment)) %></li>
+        <li><img src="<%= Client.find(appointment.client_id).photo_url %>" alt=""> You will see <%= Client.find(appointment.client_id).name %> at <%= appointment.start_time.strftime("%I:%M %p %Z on %d %b") %> | <%= link_to("Cancel", appointment, method: :delete, data: { confirm: 'Are you sure?' }) %> | <%= link_to("Change appointment", edit_appointment_path(appointment)) %></li>
     <% end %>
     <% end %>
   </ul>

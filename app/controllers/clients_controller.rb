@@ -22,7 +22,7 @@ class ClientsController < ApplicationController
 
     unless @client.errors.any?
       @client.save
-      redirect_to @client
+      redirect_to root_path
     else
       render 'new'
     end

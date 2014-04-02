@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_to root if current_client || current_stylist
+    redirect_to root_path if current_client || current_stylist
   end
 
 

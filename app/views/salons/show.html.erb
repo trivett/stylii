@@ -14,7 +14,7 @@
 
   <ul>
     <% @stylists.each do |stylist| %>
-    <li><%= link_to(stylist.name, stylist_path(stylist)) %>  | Rating: <% unless stylist.rating_average == 0.0 %><%= stylist.rating_average %> <% else %> Not Yet Rated <% end %> </li>
+    <li><img src="<%=stylist.photo_url %>" alt=""><%= link_to(stylist.name, stylist_path(stylist)) %>  | Rating: <% unless stylist.rating_average == 0.0 %><%= stylist.rating_average %> <% else %> Not Yet Rated <% end %> </li>
     <% end %>
   </ul>
 
