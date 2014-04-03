@@ -12,11 +12,22 @@
 
 <p>Specialty: <%= @stylist.specialty %></p>
 
+<p>Day off: <%= @stylist.day_off %></p>
+
+<p>Normal hours: <%= @stylist.starts_work_at.strftime("%I:%M %p") %> to <%= @stylist.ends_work_at.strftime("%I:%M %p") %></p>
+
 <% if current_client %>
 <p><%= link_to("Book an appointment with #{@stylist.name}", "/appointments/new?stylist_id=#{@stylist.id}") %></p>
 <% end %>
 
-<% if current_stylist %>
+<% if current_stylist == @stylist %>
    <p><%= link_to("Edit your information", edit_stylist_path) %></p>
    <p><%= link_to 'Quit your job', @stylist, method: :delete, data: { confirm: 'Are you sure?' } %> </p>
+<% end %>
+
+ <p>calendar:</p>
+
+
+<%= calendar @stylist_appointments, {:prev_text=>"prev", :next_text=>"next"} do |appointment| %>
+  <div><%= appointment.start_time.strftime("%I:%M %p") %> - <%= appointment.end_time.strftime("%I:%M %p") %></div>
 <% end %>

@@ -23,9 +23,6 @@
     </ul>
   <% end %>
 
-  <p>calendar:</p>
-
-
 <%= calendar @appointments, {:prev_text=>"prev", :next_text=>"next"} do |appointment| %>
   <div><%= link_to Stylist.find(appointment.stylist_id).name, appointment %></div>
 <% end %>
