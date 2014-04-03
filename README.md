@@ -39,7 +39,25 @@ I get a coupon on my birthday, too. Maybe a notice when my preferred barber move
 ##Technologies used
 
 * Ruby on Rails
-* 
+	* A pretty decent web framework. #notbad
+* Better Errors & Binding of Caller
+	* Easier-to-read errors and an in-browser REPL for figuring out what goes on
+* Rspec
+	* It's better to know. Get tested. 
+* B-Crypt
+	* Manage authentication so h @ ©|< 0 r 5 don't steal my internets.
+* HTTParty
+	* Aint nuthin but a hypertext transfer party 
+* Validates Timeliness
+	* A gem for validating datetimes
+* Chronic
+	* Badass gem that takes a human-langauge string and converts it into a Ruby TimeWithZone object. Holy smokes it's cool.
+* Browser-Timezone-Rails
+	* Gem made by an acquaintance of mine that gets the user's timezone from the browser, no input or permissions required
+* Simple_calendar
+	* A gem that renders a very stripped-down html table with the days of the current month
+* Rails ERD
+	* Too lazy to redo my ERDs after I add columns.
 
 
 
