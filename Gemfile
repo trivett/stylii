@@ -43,6 +43,10 @@ group :development do
   gem 'pry'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
@@ -62,3 +66,4 @@ gem 'chronic'
 gem 'browser-timezone-rails'
 gem "simple_calendar", "~> 0.1.10"
 gem "binding_of_caller"
+
