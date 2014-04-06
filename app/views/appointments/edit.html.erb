@@ -27,12 +27,4 @@
   <%= f.submit %>
 <% end %>
 
-<p>These are the times that <%= @stylist.name %> is unavailable.</p>
-
-  <ul>
-    <% @stylist.appointments.each do |appointment| %>
-      <% if appointment.start_time.future? %>
-      <li><%= appointment.start_time.strftime("%d %b at %I:%M%p") %></li>
-      <% end %>
-      <% end %>
-  </ul>
+<%= render "unavailable" %>

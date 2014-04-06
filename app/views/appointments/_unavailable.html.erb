@@ -1,0 +1,10 @@
+<p>These are the times that <%= @stylist.name %> is unavailable.</p>
+
+  <ul>
+    <li>All day on <%= @stylist.day_off.capitalize %></li>
+    <% @stylist.appointments.each do |appointment| %>
+      <% if appointment.start_time.future? %>
+      <li><%= appointment.start_time.strftime("%d %b at %I:%M%p") %></li>
+      <% end %>
+      <% end %>
+  </ul>
