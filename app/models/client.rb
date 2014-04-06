@@ -13,9 +13,11 @@ class Client < ActiveRecord::Base
 
 
   def age
-    age = (self.birthdate - DateTime.now).to_i
-    in_years = age / 365 #fix later ;)
-    return in_years.abs
+    now = DateTime.now
+    age = now.year - self.birthdate.year
+    age -=1 if(now.yday < self.birthdate.yday)
+    return age
   end
 
 end
+
