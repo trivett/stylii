@@ -66,4 +66,5 @@ gem 'chronic'
 gem 'browser-timezone-rails'
 gem "simple_calendar", "~> 0.1.10"
 gem "binding_of_caller"
+gem 'simplecov', '~> 0.7.1', :require => false, :group => :test
 

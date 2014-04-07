@@ -15,4 +15,6 @@ class Stylist < ActiveRecord::Base
     return age
   end
 
+
+
 end

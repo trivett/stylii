@@ -24,12 +24,6 @@
 
 <% end %>
 
-<h2>Your appointments today:</h2>
-  <ul>
-    <% @todays_appointments.each do |appointment| %>
-    <li><img src="<%= Client.find(appointment.client_id).photo_url %>" alt=""><%= Client.find(appointment.client_id).name %> at <%= appointment.start_time.strftime("%I:%M %p on %d %b %Z") %>
-    <% end %>
-  </ul>
 
 
 

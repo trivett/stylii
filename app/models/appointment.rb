@@ -65,7 +65,7 @@ class Appointment < ActiveRecord::Base
   end
 
   def stylist_shouldnt_be_cutting_another_customers_hair
-    person = Stylist.find(1)
+    person = Stylist.find(self.stylist_id)
     appointments = Appointment.where(:stylist_id => person.id)
     future_appointments = []
     appointments.each do |x|
