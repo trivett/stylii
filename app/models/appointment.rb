@@ -6,6 +6,8 @@ class Appointment < ActiveRecord::Base
 
   now = DateTime.now
 
+  today = Date.today
+
   validates_uniqueness_of :start_time, scope: [:client_id, :stylist_id]
 
   validates_datetime :start_time, :after => now, on: :create
@@ -53,6 +55,7 @@ class Appointment < ActiveRecord::Base
   end
 
   def stylist_should_be_working_at_that_time
+    self.parse_start
     self.ending
     start = self.start_time
     stylist = Stylist.find(self.stylist_id)
@@ -71,7 +74,6 @@ class Appointment < ActiveRecord::Base
       end
     end
 
-      # binding.pry
     future_appointments.each do |a|
       end_time_local = a.end_time || (a.start_time + 900)
 
