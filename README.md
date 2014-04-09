@@ -1,4 +1,4 @@
-stylii.me
+[stylii.me](http://www.stylii.me)
 =======
 
 A smarter way to find a hairstylist.
