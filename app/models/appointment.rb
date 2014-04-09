@@ -59,8 +59,8 @@ class Appointment < ActiveRecord::Base
     self.ending
     start = self.start_time
     stylist = Stylist.find(self.stylist_id)
-      if start.to_time <= stylist.starts_work_at.to_time || self.end_time.to_time <= stylist.ends_work_at.to_time
-      errors.add(:start_time, "can't be before stylist starts work or go on past stylist's time to go home")
+      if start <= stylist.starts_work_at || self.end_time >= stylist.ends_work_at
+      self.errors.add(:start_time, "can't be before stylist starts work or go on past stylist's time to go home")
     end
   end
 
