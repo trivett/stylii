@@ -15,6 +15,27 @@ class Stylist < ActiveRecord::Base
     return age
   end
 
+  def rating
+    rated = []
+    sum = 0.0
+    self.appointments.each do |a|
+      unless a.stylii_rating == nil
+        rated << a
+      end
+    end
+
+    rated.each do |x|
+      sum += x.stylii_rating
+    end
+
+    rating_average = sum / rated.count
+
+    if rated.count == 0
+      return sum
+    else
+      return rating_average
+    end
+  end
 
 
 end
