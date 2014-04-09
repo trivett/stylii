@@ -5,9 +5,6 @@ class Salon < ActiveRecord::Base
   validates :phone_number, numericality: { only_integer: true }
   validates_uniqueness_of :phone_number
 
-  YWS_ID = '2JAIAE__DDodl8hOebGFqQ'
-  YELP_LOOKUP_URL = "http://api.yelp.com/phone_search?phone="
-
   def lookup_by_phone
     #gets the full yelp details to flesh out the record from just its phone number
       digits = self.phone_number
@@ -17,16 +14,15 @@ class Salon < ActiveRecord::Base
 
 
       data = JSON.parse(raw_response.body)["businesses"][0]
-
-      self.update(:name => data["name"],
-                       :address => data["address1"],
-                       :city => data["city"],
-                       :yelp_rating_image_url => data["rating_img_url"],
-                       :zipcode => data["zip"],
-                       :state => data["state"],
-                       :photo_url => data["photo_url"],
-                       :yelp_rating => data["avg_rating"]
-                       )
+        self.update(:name => data["name"],
+                         :address => data["address1"],
+                         :city => data["city"],
+                         :yelp_rating_image_url => data["rating_img_url"],
+                         :zipcode => data["zip"],
+                         :state => data["state"],
+                         :photo_url => data["photo_url"],
+                         :yelp_rating => data["avg_rating"]
+                         )
     end
 
   end
