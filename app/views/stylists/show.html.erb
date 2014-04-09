@@ -1,3 +1,5 @@
+<div class="stylist_profile">
+
 <div class="stylist_photo"><img src="<%= @stylist.photo_url %>" alt=""></div>
 
 <div class="stylist_info">
@@ -23,10 +25,7 @@
 <p><%= link_to("Book an appointment with #{@stylist.name}", "/appointments/new?stylist_id=#{@stylist.id}") %></p>
 <% end %>
 
-<% if current_stylist == @stylist %>
-   <p><%= link_to("Edit your information", edit_stylist_path) %></p>
-   <p><%= link_to 'Quit your job', @stylist, method: :delete, data: { confirm: 'Are you sure?' } %> </p>
-<% end %>
+</div>
 <div class="stylist_calendar">
  <h3>Calendar:</h3>
 
@@ -34,4 +33,11 @@
 <%= calendar @stylist_appointments, {:prev_text=>"prev", :next_text=>"next"} do |appointment| %>
   <div><%= appointment.start_time.strftime("%I:%M %p") %> - <%= appointment.end_time.strftime("%I:%M %p") %></div>
 <% end %>
+</div>
+
+<div class="stylist_actions">
+  <% if current_stylist == @stylist %>
+     <p><%= link_to("Edit your information", edit_stylist_path) %></p>
+     <p><%= link_to 'Quit your job', @stylist, method: :delete, data: { confirm: 'Are you sure?' } %> </p>
+  <% end %>
 </div>
