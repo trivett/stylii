@@ -1,13 +1,16 @@
-<ul class"salonlist">
-<% @salons.each do |salon| %>
-  <li>
-  <span><%= link_to(salon.name, salon) %></span>
-  <br>
-  <span><img src="<%= salon.photo_url %>" alt=""></span>
-  </li>
-  <% end %>
-</ul>
+<div id="salon-list">
+  <% @salons.each do |salon| %>
+    <div class="salon">
+      <h2><%= link_to(salon.name, salon) %></h2>
+      <span><img src="<%= salon.photo_url %>" alt=""></span>
+      <span>Yelp Rating: <img src="<%= salon.yelp_rating_image_url %>" alt=""></span>
 
-<% if current_stylist %>
-  <%= link_to("Add a new salon", new_salon_path) %>
-<% end %>
+    </div>
+  <% end %>
+</div>
+
+  <% if current_stylist %>
+    <div id="add-salon">
+      <%= link_to("Add a new salon", new_salon_path) %>
+    </div>
+  <% end %>

@@ -15,10 +15,14 @@ class SalonsController < ApplicationController
   end
 
   def create
-    @salon = Salon.new(salon_params)
-    @salon.lookup_by_phone
-    @salon.save
-    redirect_to salons_path
+    if current_stylist
+      @salon = Salon.new(salon_params)
+      @salon.lookup_by_phone
+      @salon.save
+      redirect_to salons_path
+    else
+      redirect_to root_path
+    end
   end
 
 
