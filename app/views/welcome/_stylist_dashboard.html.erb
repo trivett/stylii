@@ -13,15 +13,16 @@
   </ul>
 
 <h3>Past appointments:</h3>
-    <ul>
       <% @appointments.each do |appointment| %>
         <% if appointment.start_time.past? %>
-        <li><img src="<%= Client.find(appointment.client_id).photo_url %>" alt="">You saw <%= Client.find(appointment.client_id).name %> at <%= appointment.start_time.strftime("%I:%M %p on %d %b %Z") %> | <% if appointment.stylii_rating %> Your Rating: <%= appointment.stylii_rating %> <% else %> Not yet rated. <% end %>
-        </li>
-        <% end %>
-        <% end %>
-    </ul>
+        <div><img src="<%= appointment.client.photo_url %>" alt="">You saw <%=appointment.client.name %> at <%= appointment.start_time.strftime("%I:%M %p on %d %b %Z") %> | <% if appointment.stylii_rating %> Your Rating: <%= appointment.stylii_rating %> <% else %> Not yet rated. <% end %>
 
+        <p><% if appointment.notes.nil? %> <%= link_to("Notes on this appointment", edit_appointment_path(appointment)) %> <% else %> Notes: <%= appointment.notes %> <% end %></p>
+
+
+        </div>
+        <% end %>
+        <% end %>
 <% end %>
 
 

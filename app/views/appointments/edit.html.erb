@@ -9,6 +9,8 @@
 <% end %>
 
 <% if @appointment.start_time.future? %>
+<%= render "unavailable" %>
+
 <div>
     <p>What when would you like to get a haircut?</p>
     <%= f.label :start_time %>
@@ -17,14 +19,18 @@
     <%= f.collection_select(:stylist_id, @stylists, :id, :name) %>
     <%= f.hidden_field(:client_id, :value => current_client.id) %>
   </div>
-<% else %>
-
+<% elsif @appointment.start_time.past? && current_client %>
   <div>
     <%= f.label :stylii_rating %>
     <%= f.number_field :stylii_rating %>
   </div>
+<% elsif @appointment.start_time.past? && current_stylist %>
+    <div>
+    <%= f.label :notes %>
+    <%= f.text_field :notes %>
+  </div>
+
   <% end %>
   <%= f.submit %>
 <% end %>
 
-<%= render "unavailable" %>

@@ -23,19 +23,14 @@ class Stylist < ActiveRecord::Base
         rated << a
       end
     end
-
     rated.each do |x|
       sum += x.stylii_rating
     end
-
     rating_average = sum / rated.count
-
     if rated.count == 0
       return sum
     else
       return rating_average
     end
   end
-
-
 end

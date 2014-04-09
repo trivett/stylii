@@ -16,7 +16,7 @@
     <ul>
       <% @appointments.each do |appointment| %>
         <% if appointment.start_time.past? %>
-        <li>You saw <%= Stylist.find(appointment.stylist_id).name %> at <%= appointment.start_time.strftime("%I:%M %p on %d %b %Z") %> | <% if appointment.stylii_rating.nil? %><%= link_to("Rate this haircut", edit_appointment_path(appointment)) %><% else %> Your Rating: <%= appointment.stylii_rating %> <% end %></li>
+        <li>You saw <%= appointment.stylist.name %> at <%= appointment.start_time.strftime("%I:%M %p on %d %b %Z") %> | <% if appointment.stylii_rating.nil? %><%= link_to("Rate this haircut", edit_appointment_path(appointment)) %><% else %> Your Rating: <%= appointment.stylii_rating %> <% end %></li>
         <% end %>
 
         <% end %>
