@@ -19,8 +19,11 @@ class AppointmentsController < ApplicationController
     @stylist = Stylist.find(@appointment.stylist_id)
     @appointment.parse_start
     @appointment.ending
-    @appointment.save
-    redirect_to root_path
+    if @appointment.save
+      redirect_to root_path
+    else
+      render "new"
+    end
   end
 
   def destroy

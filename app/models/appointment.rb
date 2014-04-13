@@ -2,8 +2,6 @@ class Appointment < ActiveRecord::Base
   belongs_to :client
   belongs_to :stylist
 
-
-
   now = DateTime.now
 
   today = Date.today
@@ -48,15 +46,12 @@ class Appointment < ActiveRecord::Base
 
   def stylist_should_be_working
     stylist = Stylist.find(self.stylist_id)
-      self.parse_start
       if self.start_time.strftime("%A").downcase == stylist.day_off.downcase
         errors.add(:start_time, "can't be on stylist's day off")
     end
   end
 
   def stylist_should_be_working_at_that_time
-    self.parse_start
-    self.ending
     start = self.start_time
     stylist = Stylist.find(self.stylist_id)
       if start <= stylist.starts_work_at || self.end_time >= stylist.ends_work_at
