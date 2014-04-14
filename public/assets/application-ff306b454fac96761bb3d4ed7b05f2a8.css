@@ -8,10 +8,11 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
-*= require_self
-*= require stylist
+
+
 
 */
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,800,600,300,700);
 
 body {
@@ -77,3 +78,30 @@ li {
 .stylist_calendar h2{
   text-align: center;
 }
+
+.stylist_photo {
+  float:right;
+  margin: 10px;
+}
+.stylist_info {
+  width: 400px;
+  display: block;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.stylist_calendar {
+  margin: 10px;
+}
+.stylist_profile {
+  margin: 5px;
+  height: 400px;
+}
+
+.stylist_photo{
+  max-height: 400px;
+}
+.stylist_actions{
+  margin: 5px;
+}
+

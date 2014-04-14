@@ -7,18 +7,10 @@ class Appointment < ActiveRecord::Base
   today = Date.today
 
   validates_uniqueness_of :start_time, scope: [:client_id, :stylist_id]
-
   validates_datetime :start_time, :after => now, on: :create
-
-  validate :stylist_should_be_working, on: :create
-
+  validate :stylist_should_be_working_that_day, on: :create
   validate :stylist_should_be_working_at_that_time, on: :create
-
   validate :stylist_shouldnt_be_cutting_another_customers_hair, on: :create
-
-
-
-  validates :stylii_rating, numericality: { :greater_than => 0, :less_than_or_equal_to => 5}, on: :update
 
 
   def parse_start
@@ -44,7 +36,7 @@ class Appointment < ActiveRecord::Base
 
 # These following few methods check whether the stylist is working, and whether he or she is busy cutting hair at that time.
 
-  def stylist_should_be_working
+  def stylist_should_be_working_that_day
     stylist = Stylist.find(self.stylist_id)
       if self.start_time.strftime("%A").downcase == stylist.day_off.downcase
         errors.add(:start_time, "can't be on stylist's day off")
@@ -52,9 +44,9 @@ class Appointment < ActiveRecord::Base
   end
 
   def stylist_should_be_working_at_that_time
-    start = self.start_time
+    return true
     stylist = Stylist.find(self.stylist_id)
-      if start <= stylist.starts_work_at || self.end_time >= stylist.ends_work_at
+      if self.start_time.seconds_until_end_of_day <= stylist.starts_work_at.seconds_until_end_of_day || self.end_time.seconds_until_end_of_day >= stylist.ends_work_at.seconds_until_end_of_day
       self.errors.add(:start_time, "can't be before stylist starts work or go on past stylist's time to go home")
     end
   end
@@ -70,22 +62,14 @@ class Appointment < ActiveRecord::Base
     end
 
     future_appointments.each do |a|
+      binding.pry
       end_time_local = a.end_time || (a.start_time + 900)
 
-      if self.start_time.between?(a.start_time.to_time, end_time_local.to_time)
+      if self.start_time.seconds_until_end_of_day == a.start_time.seconds_until_end_of_day || self.start_time.seconds_until_end_of_day.between?(a.start_time.seconds_until_end_of_day, end_time_local.seconds_until_end_of_day)
         errors.add(:start_time, "can't be during another customer's haircut")
-        break
-
-
       end
-
     end
-
   end
-
-
-
-
 end
 
 

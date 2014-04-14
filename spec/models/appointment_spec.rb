@@ -49,12 +49,15 @@ describe Appointment do
       a.parse_start
       a.ending
       a.save
+
       b = Appointment.new(client_id: me.id, stylist_id: ron.id ,start_time: nil, end_time: nil, user_input: "thursday at ten a.m.")
       b.parse_start
       b.ending
       b.save
 
-      expect(b.errors.messages[:start_time]).to include("can't be during another customer's haircut")
+      binding.pry
+      expect(b.valid?).to eq(false)
+      # expect(b.errors.messages[:start_time]).to include("can't be during another customer's haircut")
   end
 end
 

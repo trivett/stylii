@@ -11,7 +11,6 @@ class SalonsController < ApplicationController
 
   def new
     @salon = Salon.new
-    # the only param will be
   end
 
   def create
